@@ -4,17 +4,19 @@ import React, {
   SyntheticEvent,
 } from 'react';
 
-import bridge, { UserInfo } from '@vkontakte/vk-bridge';
+import bridge from '@vkontakte/vk-bridge';
+
+import { User, Popout } from '@test';
 
 import View from '@vkontakte/vkui/dist/components/View/View';
 import ScreenSpinner from '@vkontakte/vkui/dist/components/ScreenSpinner/ScreenSpinner';
 import '@vkontakte/vkui/dist/vkui.css';
 
-import Home from './panels/Home';
-import Persik from './panels/Persik';
+import StoreProvider from './utils/StoreProvider';
+import { AppProvider } from './utils/contexts/AppContext';
 
-type User = UserInfo | null;
-type Popout = React.ReactElement | null;
+import Home from './panels/Home';
+import Albums from './panels/Albums';
 
 const App: React.FC = () => {
   const [activePanel, setActivePanel] = useState('home');
@@ -50,15 +52,23 @@ const App: React.FC = () => {
     setPopout(null);
   };
 
+  const togglePopout = (value: Popout) => {
+    setPopout(value);
+  };
+
   const go = (e: SyntheticEvent<any>) => {
     setActivePanel(e.currentTarget?.dataset.to);
   };
 
   return (
-    <View activePanel={activePanel} popout={popout}>
-      <Home id="home" fetchedUser={fetchedUser} go={go} />
-      <Persik id="persik" go={go} />
-    </View>
+    <StoreProvider>
+      <AppProvider value={{ go, togglePopout }}>
+        <View activePanel={activePanel} popout={popout}>
+          <Home id="home" fetchedUser={fetchedUser} />
+          <Albums id="albums" />
+        </View>
+      </AppProvider>
+    </StoreProvider>
   );
 };
 
