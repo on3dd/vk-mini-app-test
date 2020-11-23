@@ -22,7 +22,7 @@ const Home: React.FC<HomeProps> = ({
   fetchedUser,
 }: HomeProps) => (
   <Panel id={id}>
-    <PanelHeader>Example</PanelHeader>
+    <PanelHeader>Home</PanelHeader>
     {fetchedUser && (
       <Group title="User Data Fetched with VK Bridge">
         <Cell

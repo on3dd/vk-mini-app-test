@@ -1,6 +1,7 @@
 import React from 'react';
-
+import styled from 'styled-components';
 import { platform, IOS } from '@vkontakte/vkui';
+
 import Panel from '@vkontakte/vkui/dist/components/Panel/Panel';
 import PanelHeader from '@vkontakte/vkui/dist/components/PanelHeader/PanelHeader';
 import PanelHeaderButton from '@vkontakte/vkui/dist/components/PanelHeaderButton/PanelHeaderButton';
@@ -8,7 +9,6 @@ import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 
 import persik from '../img/persik.png';
-import './Persik.css';
 
 type PersikProps = {
   id: string;
@@ -16,6 +16,13 @@ type PersikProps = {
 };
 
 const osName = platform();
+
+const Img = styled.img`
+  display: block;
+  width: 30%;
+  max-width: 240px;
+  margin: 20px auto;
+`;
 
 const Persik: React.FC<PersikProps> = ({
   id,
@@ -35,8 +42,8 @@ const Persik: React.FC<PersikProps> = ({
     >
       Persik
     </PanelHeader>
-    <img
-      className="Persik"
+    <Img
+      className="persik"
       src={persik}
       alt="Persik The Cat"
     />
