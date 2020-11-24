@@ -1,15 +1,9 @@
-import React, {
-  useState,
-  useEffect,
-  SyntheticEvent,
-} from 'react';
+import React, { useEffect, SyntheticEvent } from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
 
+import styled from 'styled-components';
 import bridge from '@vkontakte/vk-bridge';
 
-import { User, Popout } from '@test';
-
-import View from '@vkontakte/vkui/dist/components/View/View';
-import ScreenSpinner from '@vkontakte/vkui/dist/components/ScreenSpinner/ScreenSpinner';
 import '@vkontakte/vkui/dist/vkui.css';
 
 import StoreProvider from './utils/StoreProvider';
@@ -18,13 +12,9 @@ import { AppProvider } from './utils/contexts/AppContext';
 import Home from './panels/Home';
 import Albums from './panels/Albums';
 
-const App: React.FC = () => {
-  const [activePanel, setActivePanel] = useState('home');
-  const [fetchedUser, setUser] = useState(null as User);
-  const [popout, setPopout] = useState(
-    (<ScreenSpinner />) as Popout,
-  );
+const Main = styled.main``;
 
+const App: React.FC = () => {
   useEffect(() => {
     bridge.subscribe(({ detail: { type, data } }: any) => {
       if (type === 'VKWebAppUpdateConfig') {
@@ -41,33 +31,34 @@ const App: React.FC = () => {
         );
       }
     });
-
-    fetchData();
   }, []);
 
-  const fetchData = async () => {
-    const user = await bridge.send('VKWebAppGetUserInfo');
-
-    setUser(user);
-    setPopout(null);
-  };
-
-  const togglePopout = (value: Popout) => {
-    setPopout(value);
+  const togglePopout = (value: any) => {
+    // setPopout(value);
   };
 
   const go = (e: SyntheticEvent<any>) => {
-    setActivePanel(e.currentTarget?.dataset.to);
+    // setActivePanel(e.currentTarget?.dataset.to);
+  };
+
+  const RouteHome = () => {
+    return <Home id="home" />;
+  };
+
+  const RouteAlbums = () => {
+    return <Albums id="albums" />;
   };
 
   return (
     <StoreProvider>
-      <AppProvider value={{ go, togglePopout }}>
-        <View activePanel={activePanel} popout={popout}>
-          <Home id="home" fetchedUser={fetchedUser} />
-          <Albums id="albums" />
-        </View>
-      </AppProvider>
+      <BrowserRouter>
+        <AppProvider value={{ go, togglePopout }}>
+          <Main>
+            <Route path="/" exact component={RouteHome} />
+            <Route path="/albums" component={RouteAlbums} />
+          </Main>
+        </AppProvider>
+      </BrowserRouter>
     </StoreProvider>
   );
 };

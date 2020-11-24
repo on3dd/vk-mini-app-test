@@ -1,9 +1,9 @@
 import React, { createContext } from 'react';
-import { Popout } from '@test';
+// import { Popout } from '@test';
 
 type ContextValueProps = {
   go: (props: any) => void;
-  togglePopout: (value: Popout) => void;
+  togglePopout: (value?: any) => void;
 };
 
 const contextValue = (val: ContextValueProps) => val;

@@ -17,7 +17,7 @@ declare module '@test' {
   }
 
   export type User = UserInfo | null;
-  export type Popout = React.ReactElement | null;
+  export type Popout = React.ReactNode;
 
   export interface Album {
     id: number;

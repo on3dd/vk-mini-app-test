@@ -1,4 +1,4 @@
-import { Dispatch } from 'redux';
+import { Dispatch } from '@test/thunk';
 
 import axiosService from '../utils/axiosService';
 
@@ -11,7 +11,7 @@ import {
 import { API_ENDPOINTS } from '../utils/constants';
 
 const fetchPhotos = (id: number) => {
-  return async (dispatch: Dispatch<any>) => {
+  return async (dispatch: Dispatch) => {
     dispatch({ type: FETCHING_PHOTOS });
 
     return axiosService

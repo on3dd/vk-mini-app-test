@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import fetchAlbums from '../../actions/fetchAlbums';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import { RootState } from '@test';
 
@@ -12,15 +10,9 @@ type AlbumProps = {};
 const Albums: React.FC<AlbumProps> = (
   props: AlbumProps,
 ) => {
-  const dispatch = useDispatch();
-
   const albums = useSelector(
     (state: RootState) => state.albums,
   );
-
-  useEffect(() => {
-    dispatch(fetchAlbums());
-  }, [dispatch]);
 
   return <AlbumsList data={albums.data} />;
 };
