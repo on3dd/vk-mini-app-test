@@ -6,10 +6,8 @@ import fetchAlbums from '../actions/fetchAlbums';
 import PanelWrapper from '../utils/wrappers/PanelWrapper';
 
 import Panel from '@vkontakte/vkui/dist/components/Panel/Panel';
-import PanelHeader from '@vkontakte/vkui/dist/components/PanelHeader/PanelHeader';
 
-import PanelHeaderButtonBack from '../components/base-ui/panel-header-button-back';
-
+import PanelHeaderWithButton from '../components/base-ui/panel-header-with-button';
 import AlbumsComponent from '../components/albums';
 
 type AlbumsProps = {
@@ -36,9 +34,9 @@ const Albums: React.FC<AlbumsProps> = ({
   return (
     <PanelWrapper id={id} fetching={fetching}>
       <Panel id={id}>
-        <PanelHeader left={<PanelHeaderButtonBack />}>
+        <PanelHeaderWithButton>
           Albums
-        </PanelHeader>
+        </PanelHeaderWithButton>
         <AlbumsComponent />
       </Panel>
     </PanelWrapper>
