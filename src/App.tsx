@@ -1,4 +1,4 @@
-import React, { useEffect, SyntheticEvent } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import styled from 'styled-components';
@@ -7,7 +7,6 @@ import bridge from '@vkontakte/vk-bridge';
 import '@vkontakte/vkui/dist/vkui.css';
 
 import StoreProvider from './utils/StoreProvider';
-import { AppProvider } from './utils/contexts/AppContext';
 
 import Home from './panels/Home';
 import Albums from './panels/Albums';
@@ -36,60 +35,34 @@ const App: React.FC = () => {
     });
   }, []);
 
-  const togglePopout = (value: any) => {
-    // setPopout(value);
-  };
-
-  const go = (e: SyntheticEvent<any>) => {
-    // setActivePanel(e.currentTarget?.dataset.to);
-  };
-
-  const RouteHome = () => {
-    return <Home id="home" />;
-  };
-
-  const RouteAlbums = () => {
-    return <Albums id="albums" />;
-  };
-
-  const RouteAlbum = () => {
-    return <Album id="album" />;
-  };
-
-  const RoutePhotos = () => {
-    return <Photos id="photos" />;
-  };
-
-  const RoutePhoto = () => {
-    return <Photo id="photo" />;
-  };
-
   return (
     <StoreProvider>
       <BrowserRouter>
-        <AppProvider value={{ go, togglePopout }}>
-          <Main>
-            <Route path="/" exact component={RouteHome} />
-            <Route
-              path="/albums"
-              exact
-              component={RouteAlbums}
-            />
-            <Route
-              path="/albums/:id"
-              component={RouteAlbum}
-            />
-            <Route
-              path="/photos"
-              exact
-              component={RoutePhotos}
-            />
-            <Route
-              path="/photos/:id"
-              component={RoutePhoto}
-            />
-          </Main>
-        </AppProvider>
+        <Main>
+          <Route
+            path="/"
+            exact
+            component={() => <Home id="home" />}
+          />
+          <Route
+            path="/albums"
+            exact
+            component={() => <Albums id="albums" />}
+          />
+          <Route
+            path="/albums/:id"
+            component={() => <Album id="album" />}
+          />
+          <Route
+            path="/photos"
+            exact
+            component={() => <Photos id="photos" />}
+          />
+          <Route
+            path="/photos/:id"
+            component={() => <Photo id="photo" />}
+          />
+        </Main>
       </BrowserRouter>
     </StoreProvider>
   );
