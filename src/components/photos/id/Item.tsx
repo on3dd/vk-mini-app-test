@@ -39,7 +39,7 @@ const Container = styled.div`
 const Item: React.FC<ItemProps> = ({ data }: ItemProps) => {
   const to = useMemo(() => {
     return `/albums/${data.albumId}`;
-  }, [data.id]);
+  }, [data.albumId]);
 
   return (
     <Group>
