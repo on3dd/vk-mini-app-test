@@ -1,28 +1,30 @@
 import {
-  FETCHING_ALBUM,
-  FETCHING_ALBUM_SUCCESS,
-  FETCHING_ALBUM_FAIL,
-  FETCHING_PHOTOS,
-  FETCHING_PHOTOS_SUCCESS,
-  FETCHING_PHOTOS_FAIL,
+  FETCHING_PHOTO,
+  FETCHING_PHOTO_SUCCESS,
+  FETCHING_PHOTO_FAIL,
 } from '../utils/actionTypes';
 
-import { AsyncAction, PhotosState } from '@test';
+import { AsyncAction, PhotoState } from '@test';
 
-const initialState: PhotosState = {
-  data: [],
+const initialState: PhotoState = {
+  data: {
+    id: 0,
+    albumId: 0,
+    title: '',
+    url: '',
+    thumbnailUrl: '',
+  },
   isFetching: false,
   hasError: false,
   errorMessage: null,
 };
 
-const photosReducer = (
+const photoReducer = (
   state = initialState,
   action: AsyncAction,
 ) => {
   switch (action.type) {
-    case FETCHING_ALBUM:
-    case FETCHING_PHOTOS:
+    case FETCHING_PHOTO:
       return Object.assign({}, state, {
         data: [],
         isFetching: true,
@@ -30,8 +32,7 @@ const photosReducer = (
         errorMessage: null,
       });
 
-    case FETCHING_ALBUM_SUCCESS:
-    case FETCHING_PHOTOS_SUCCESS:
+    case FETCHING_PHOTO_SUCCESS:
       return Object.assign({}, state, {
         data: action.payload,
         isFetching: false,
@@ -39,8 +40,7 @@ const photosReducer = (
         errorMessage: null,
       });
 
-    case FETCHING_ALBUM_FAIL:
-    case FETCHING_PHOTOS_FAIL:
+    case FETCHING_PHOTO_FAIL:
       return Object.assign({}, state, {
         isFetching: false,
         hasError: true,
@@ -52,4 +52,4 @@ const photosReducer = (
   }
 };
 
-export default photosReducer;
+export default photoReducer;

@@ -5,10 +5,10 @@ import { RootState } from '@test';
 
 import PhotosList from './List';
 
-type PhotoProps = {};
+type PhotosProps = {};
 
-const Photos: React.FC<PhotoProps> = (
-  props: PhotoProps,
+const Photos: React.FC<PhotosProps> = (
+  props: PhotosProps,
 ) => {
   const photos = useSelector(
     (state: RootState) => state.photos,

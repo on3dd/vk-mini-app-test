@@ -34,17 +34,19 @@ declare module '@test' {
   }
 
   export interface State<T> {
-    data: T[];
+    data: T;
     isFetching: boolean;
     hasError: boolean;
     errorMessage: null | string;
   }
 
-  export interface AlbumsState extends State<Album> {}
-  export interface PhotosState extends State<Photo> {}
+  export interface AlbumsState extends State<Album[]> {}
+  export interface PhotosState extends State<Photo[]> {}
+  export interface PhotoState extends State<Photo> {}
 
   export interface RootState {
     albums: AlbumsState;
     photos: PhotosState;
+    photo: PhotoState;
   }
 }

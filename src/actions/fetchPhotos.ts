@@ -10,12 +10,12 @@ import {
 
 import { API_ENDPOINTS } from '../utils/constants';
 
-const fetchPhotos = (id: number) => {
+const fetchPhotos = () => {
   return async (dispatch: Dispatch) => {
     dispatch({ type: FETCHING_PHOTOS });
 
     return axiosService
-      .get(API_ENDPOINTS.photos.id(id))
+      .get(API_ENDPOINTS.photos.index)
       .then((res) => {
         dispatch({
           type: FETCHING_PHOTOS_SUCCESS,

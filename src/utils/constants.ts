@@ -2,10 +2,13 @@ export const API_BASE_URL =
   'https://jsonplaceholder.typicode.com';
 
 export const API_ENDPOINTS = {
-  albums: '/albums',
+  albums: {
+    index: '/albums',
+    id: (id: number) => `/photos?albumId=${id}`,
+  },
   photos: {
     index: '/photos',
-    id: (id: number) => `/photos?albumId=${id}`,
+    id: (id: number) => `/photos?id=${id}`,
   },
 };
 

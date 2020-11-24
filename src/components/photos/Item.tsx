@@ -18,14 +18,12 @@ const Item: React.FC<ItemProps> = ({ data }: ItemProps) => {
   }, [data.thumbnailUrl]);
 
   const go = useCallback(() => {
-    return history.push(
-      `/photos/${data.albumId}/${data.id}`,
-    );
-  }, [history, data.albumId, data.id]);
+    return history.push(`/photos/${data.id}`);
+  }, [history, data.id]);
 
   return (
     <SimpleCell
-      className="albums__item"
+      className="photos__item"
       before={before}
       onClick={go}
       data-to="posts"

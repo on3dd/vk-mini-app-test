@@ -11,7 +11,9 @@ import { AppProvider } from './utils/contexts/AppContext';
 
 import Home from './panels/Home';
 import Albums from './panels/Albums';
+import Album from './panels/Album';
 import Photos from './panels/Photos';
+import Photo from './panels/Photo';
 
 const Main = styled.main``;
 
@@ -50,8 +52,16 @@ const App: React.FC = () => {
     return <Albums id="albums" />;
   };
 
+  const RouteAlbum = () => {
+    return <Album id="album" />;
+  };
+
   const RoutePhotos = () => {
     return <Photos id="photos" />;
+  };
+
+  const RoutePhoto = () => {
+    return <Photo id="photo" />;
   };
 
   return (
@@ -60,8 +70,24 @@ const App: React.FC = () => {
         <AppProvider value={{ go, togglePopout }}>
           <Main>
             <Route path="/" exact component={RouteHome} />
-            <Route path="/albums" component={RouteAlbums} />
-            <Route path="/photos/:id" component={RoutePhotos} />
+            <Route
+              path="/albums"
+              exact
+              component={RouteAlbums}
+            />
+            <Route
+              path="/albums/:id"
+              component={RouteAlbum}
+            />
+            <Route
+              path="/photos"
+              exact
+              component={RoutePhotos}
+            />
+            <Route
+              path="/photos/:id"
+              component={RoutePhoto}
+            />
           </Main>
         </AppProvider>
       </BrowserRouter>

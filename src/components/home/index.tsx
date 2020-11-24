@@ -40,6 +40,11 @@ const Home: React.FC<HomeProps> = ({ data }: HomeProps) => {
       <Group title="Navigation Example">
         <FixedLayout vertical="bottom">
           <Div>
+            <LinkButton to="/photos">
+              Go to photos
+            </LinkButton>
+          </Div>
+          <Div>
             <LinkButton to="/albums">
               Go to albums
             </LinkButton>

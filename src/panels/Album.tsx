@@ -1,46 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
-import fetchPhotos from '../actions/fetchPhotos';
+import fetchAlbum from '../actions/fetchAlbum';
 
 import PanelWrapper from '../utils/wrappers/PanelWrapper';
 
 import Panel from '@vkontakte/vkui/dist/components/Panel/Panel';
 
 import PanelHeaderWithButton from '../components/base-ui/panel-header-with-button';
-import PhotosComponent from '../components/photos';
+import AlbumComponent from '../components/albums/id';
 
-type PhotosProps = {
+type AlbumProps = {
   id: string;
 };
 
-const Photos: React.FC<PhotosProps> = ({
+type AlbumParams = {
+  id: string;
+};
+
+const Album: React.FC<AlbumProps> = ({
   id,
-}: PhotosProps) => {
+}: AlbumProps) => {
   const [fetching, setFetching] = useState(true);
 
   const dispatch = useDispatch();
 
+  const params: AlbumParams = useParams();
+
   useEffect(() => {
     const fetchData = async () => {
-      await dispatch(fetchPhotos());
+      await dispatch(fetchAlbum(+params.id));
 
       setFetching(false);
     };
 
     fetchData();
-  }, [dispatch]);
+  }, [dispatch, params.id]);
 
   return (
     <PanelWrapper id={id} fetching={fetching}>
       <Panel id={id}>
-        <PanelHeaderWithButton>
-          Photos
-        </PanelHeaderWithButton>
-        <PhotosComponent />
+        <PanelHeaderWithButton>Album</PanelHeaderWithButton>
+        <AlbumComponent />
       </Panel>
     </PanelWrapper>
   );
 };
 
-export default Photos;
+export default Album;

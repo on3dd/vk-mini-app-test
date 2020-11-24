@@ -3,32 +3,32 @@ import { Dispatch } from '@test/thunk';
 import axiosService from '../utils/axiosService';
 
 import {
-  FETCHING_ALBUMS,
-  FETCHING_ALBUMS_SUCCESS,
-  FETCHING_ALBUMS_FAIL,
+  FETCHING_PHOTO,
+  FETCHING_PHOTO_SUCCESS,
+  FETCHING_PHOTO_FAIL,
 } from '../utils/actionTypes';
 
 import { API_ENDPOINTS } from '../utils/constants';
 
-const fetchAlbums = () => {
+const fetchPhotos = (id: number) => {
   return async (dispatch: Dispatch) => {
-    dispatch({ type: FETCHING_ALBUMS });
+    dispatch({ type: FETCHING_PHOTO });
 
     return axiosService
-      .get(API_ENDPOINTS.albums.index)
+      .get(API_ENDPOINTS.photos.id(id))
       .then((res) => {
         dispatch({
-          type: FETCHING_ALBUMS_SUCCESS,
-          payload: res.data,
+          type: FETCHING_PHOTO_SUCCESS,
+          payload: res.data[0],
         });
       })
       .catch((err) => {
         dispatch({
-          type: FETCHING_ALBUMS_FAIL,
+          type: FETCHING_PHOTO_FAIL,
           payload: err,
         });
       });
   };
 };
 
-export default fetchAlbums;
+export default fetchPhotos;

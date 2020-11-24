@@ -1,29 +1,29 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { Album } from '@test';
+import { Photo } from '@test';
 
 import SimpleCell from '@vkontakte/vkui/dist/components/SimpleCell/SimpleCell';
 import Avatar from '@vkontakte/vkui/dist/components/Avatar/Avatar';
 
 type ItemProps = {
-  data: Album;
+  data: Photo;
 };
 
 const Item: React.FC<ItemProps> = ({ data }: ItemProps) => {
   const history = useHistory();
 
-  const go = useCallback(() => {
-    return history.push(`/albums/${data.id}`);
-  }, [history, data.id]);
-
   const before = useMemo(() => {
-    return <Avatar mode="default" size={28} />;
-  }, []);
+    return <Avatar size={28} src={data.thumbnailUrl} />;
+  }, [data.thumbnailUrl]);
+
+  const go = useCallback(() => {
+    return history.push(`/photos/${data.id}`);
+  }, [history, data.id]);
 
   return (
     <SimpleCell
-      className="albums__item"
+      className="album__item"
       before={before}
       onClick={go}
       data-to="posts"
