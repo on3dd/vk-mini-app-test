@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { Album } from '@test';
+import { Photo } from '@test';
 
 import VKList from '@vkontakte/vkui/dist/components/List/List';
 
 import Item from './Item';
 
 type ListProps = {
-  data: Album[];
+  data: Photo[];
 };
 
 const List: React.FC<ListProps> = ({ data }: ListProps) => {

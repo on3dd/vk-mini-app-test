@@ -11,6 +11,7 @@ import { AppProvider } from './utils/contexts/AppContext';
 
 import Home from './panels/Home';
 import Albums from './panels/Albums';
+import Photos from './panels/Photos';
 
 const Main = styled.main``;
 
@@ -49,6 +50,10 @@ const App: React.FC = () => {
     return <Albums id="albums" />;
   };
 
+  const RoutePhotos = () => {
+    return <Photos id="photos" />;
+  };
+
   return (
     <StoreProvider>
       <BrowserRouter>
@@ -56,6 +61,7 @@ const App: React.FC = () => {
           <Main>
             <Route path="/" exact component={RouteHome} />
             <Route path="/albums" component={RouteAlbums} />
+            <Route path="/photos/:id" component={RoutePhotos} />
           </Main>
         </AppProvider>
       </BrowserRouter>

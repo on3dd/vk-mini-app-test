@@ -20,6 +20,7 @@ const photosReducer = (
   switch (action.type) {
     case FETCHING_PHOTOS:
       return Object.assign({}, state, {
+        data: [],
         isFetching: true,
         hasError: false,
         errorMessage: null,

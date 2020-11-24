@@ -20,6 +20,7 @@ const albumsReducer = (
   switch (action.type) {
     case FETCHING_ALBUMS:
       return Object.assign({}, state, {
+        data: [],
         isFetching: true,
         hasError: false,
         errorMessage: null,
