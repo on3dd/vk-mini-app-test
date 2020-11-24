@@ -41,7 +41,9 @@ const Album: React.FC<AlbumProps> = ({
   return (
     <PanelWrapper id={id} fetching={fetching}>
       <Panel id={id}>
-        <PanelHeaderWithButton>Album</PanelHeaderWithButton>
+        <PanelHeaderWithButton to="/albums">
+          Album
+        </PanelHeaderWithButton>
         <AlbumComponent />
       </Panel>
     </PanelWrapper>

@@ -34,7 +34,7 @@ const Photos: React.FC<PhotosProps> = ({
   return (
     <PanelWrapper id={id} fetching={fetching}>
       <Panel id={id}>
-        <PanelHeaderWithButton>
+        <PanelHeaderWithButton to="/">
           Photos
         </PanelHeaderWithButton>
         <PhotosComponent />

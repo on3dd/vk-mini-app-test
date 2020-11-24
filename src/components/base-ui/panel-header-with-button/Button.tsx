@@ -19,14 +19,19 @@ const Icon: React.FC = () => {
   );
 };
 
-const PanelHeaderButtonBack: React.FC<PanelHeaderButtonProps> = (
-  props: PanelHeaderButtonProps,
-) => {
+interface PanelHeaderButtonBackProps
+  extends PanelHeaderButtonProps {
+  to: string;
+}
+
+const PanelHeaderButtonBack: React.FC<PanelHeaderButtonBackProps> = ({
+  to,
+}: PanelHeaderButtonBackProps) => {
   const history = useHistory();
 
   const go = useCallback(() => {
-    return history.goBack();
-  }, [history]);
+    return history.push(to);
+  }, [history, to]);
 
   return (
     <PanelHeaderButton onClick={go} data-to="home">

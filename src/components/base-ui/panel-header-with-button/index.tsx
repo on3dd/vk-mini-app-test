@@ -6,11 +6,17 @@ import PanelHeader, {
 
 import PanelHeaderButtonBack from './Button';
 
-const PanelHeaderWithButton: React.FC<PanelHeaderProps> = ({
+interface PanelHeaderWithButtonProps
+  extends PanelHeaderProps {
+  to: string;
+}
+
+const PanelHeaderWithButton: React.FC<PanelHeaderWithButtonProps> = ({
+  to,
   children,
-}: PanelHeaderProps) => {
+}: PanelHeaderWithButtonProps) => {
   return (
-    <PanelHeader left={<PanelHeaderButtonBack />}>
+    <PanelHeader left={<PanelHeaderButtonBack to={to} />}>
       {children}
     </PanelHeader>
   );
