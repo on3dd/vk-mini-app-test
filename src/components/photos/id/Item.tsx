@@ -1,35 +1,58 @@
-import React, { useMemo, useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useMemo } from 'react';
+
+import styled from 'styled-components';
 
 import { Photo } from '@test';
 
-import SimpleCell from '@vkontakte/vkui/dist/components/SimpleCell/SimpleCell';
-import Avatar from '@vkontakte/vkui/dist/components/Avatar/Avatar';
+import Group from '@vkontakte/vkui/dist/components/Group/Group';
+import Div from '@vkontakte/vkui/dist/components/Div/Div';
+import Title from '@vkontakte/vkui/dist/components/Typography/Title/Title';
+
+import LinkButton from '../../base-ui/link-button';
 
 type ItemProps = {
   data: Photo;
 };
 
+const StyledDiv = styled(Div)`
+  text-align: center;
+`;
+
+type ContainerProps = {
+  url: string;
+};
+
+const Container = styled.div`
+  width: 100%;
+  padding-top: 100%;
+  margin-bottom: 1rem;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  background-image: ${(props: ContainerProps) => {
+    return `url(${props.url})`;
+  }};
+`;
+
 const Item: React.FC<ItemProps> = ({ data }: ItemProps) => {
-  const history = useHistory();
-
-  const before = useMemo(() => {
-    return <Avatar size={28} src={data.thumbnailUrl} />;
-  }, [data.thumbnailUrl]);
-
-  const go = useCallback(() => {
-    return history.push(`/photos/${data.id}`);
-  }, [history, data.id]);
+  const to = useMemo(() => {
+    return `/albums/${data.albumId}`;
+  }, [data.id]);
 
   return (
-    <SimpleCell
-      className="photo__item"
-      before={before}
-      onClick={go}
-      data-to="posts"
-    >
-      {data.title}
-    </SimpleCell>
+    <Group>
+      <StyledDiv>
+        <Container url={data.url} />
+        <Title level="1" weight="heavy">
+          {data.title}
+        </Title>
+        <LinkButton to={to} mode="tertiary">
+          album
+        </LinkButton>
+      </StyledDiv>
+    </Group>
   );
 };
 
