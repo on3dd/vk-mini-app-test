@@ -17,5 +17,5 @@ package-lock.json
 .vscode
 .idea
 
-# Enviroment variables
+# Environment variables
 .env
